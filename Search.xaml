@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="Platinum_Star.Search"
+             xmlns:controls="clr-namespace:Platinum_Star"
+             
+             Title="Search">
+    <Shell.SearchHandler>
+        <controls:ProductSearchHandler Placeholder="Search" Query="" ShowsResults="True" x:Name="searchHandler">
+            <controls:ProductSearchHandler.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10"
+                          ColumnDefinitions="0.15*,0.85*">
+                        <Image Source="{Binding ImageUrl}"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Name}"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"  Margin="10,0,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </controls:ProductSearchHandler.ItemTemplate>
+        </controls:ProductSearchHandler>
+    </Shell.SearchHandler>
+
+
+
+    <VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
