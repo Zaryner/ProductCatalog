@@ -30,6 +30,21 @@ namespace Platinum_Star
             products[products.Count - 1].AddCateggory("развлечения");
             products.Add(new Product("Зеленые шарики", "Тестовый продукт. Он не должен появляться в каталоге", 5.34, 3, "tango.jpg"));
             products[products.Count - 1].AddCateggory("развлечения");
+            products.Add(new Product("Кларетка", "Увеличивает восстановление маны выбранного существа " +
+                "на 6. Действует 25 сек. Восстановление прекращается, если получить урон от вражеского героя или Рошана.", 0.34, 3, "clarity.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения");
+            products.Add(new Product("Палочка получше", "Мгновенно восстанавливает 15 здоровья и маны за каждый имеющийся заряд. " +
+                "Может иметь до 20 зарядов. Получает один заряд каждый раз, когда видимый враг в радиусе 1200 использует способность.", 213, 3, "magic_wand.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения");
+            products.Add(new Product("Палочка", "Мгновенно восстанавливает 15 здоровья и маны за каждый имеющийся заряд. " +
+    "Может иметь до 10 зарядов. Получает один заряд каждый раз, когда видимый враг в радиусе 1200 использует способность.", 213, 3, "magic_stick.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения");
+            products.Add(new Product("Фейрик", "Чтобы вы были здоровы", 3.50, 3, "faerie_fire.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения");
+            products.Add(new Product("Блэйд мэйл", "Модная одежда с шипами", 550, 3, "blade_mail.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения"); 
+            products.Add(new Product("Сабля", "Прям как у мушкетера", 650, 3, "echo_sabre.jpg"));
+            products[products.Count - 1].AddCateggory("развлечения"); 
         }
 
         public Product(string? name, string? description, double price, int count, string imageURL)

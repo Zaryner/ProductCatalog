@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Platinum_Star.ProductPage"
-             Title="Product">
+             x:Class="Platinum_Star.ProductPage" Title="Product">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10">
-                
                 <Button Text="Back" BackgroundColor="Black" TextColor="White" HorizontalOptions="Start" Clicked="Back"/>
                 <!-- Изображение товара -->
                 <Image Aspect="AspectFit" HeightRequest="300" x:Name="ProductImage"/>
@@ -20,9 +18,35 @@
                 <!-- Описание товара -->
                 <Label x:Name="ProductDescription" Margin="0,10,0,0" />
 
-                <!-- Кнопка "Добавить в корзину" -->
-                <Button Text="Add to Cart" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" />
+                <!-- Кнопки "Добавить в корзину" и "Добавить в избранное" -->
+                <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                    <Button Text="Add to Cart" BackgroundColor="Green" TextColor="White" Margin="0,0,10,0" Clicked="AddToCart_Clicked"/>
+                    <ImageButton Source="like2.png" WidthRequest="50" HeightRequest="50" Margin="0,0,0,0" Clicked="FavoriteButton_Clicked" x:Name="like"/>
+                </StackLayout>
 
+                <!-- Рейтинг товара -->
+                <Label Text="Rating:" FontSize="Subtitle" Margin="0,10,0,0"/>
+                <Slider Minimum="0" Maximum="5" x:Name="ProductRating" IsEnabled="False"/>
+                <!-- Раздел комментариев -->
+                <Label Text="Comments:" FontSize="Subtitle" Margin="0,10,0,0"/>
+                <ListView x:Name="CommentsList" Margin="0,5,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Author}" FontSize="Caption" Margin="0,0,10,0"/>
+                                    <Label Text="{Binding Comment}" FontSize="Caption"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!-- Форма оставления комментария -->
+                <Label Text="Leave a Comment:" FontSize="Subtitle" Margin="0,10,0,0"/>
+                <Entry Placeholder="Enter your comment" Margin="0,5,0,0" x:Name="CommentEntry"/>
+                <Slider Minimum="0" Maximum="5" ValueChanged="CommentRating_ValueChanged" x:Name="CommentRating"/>
+                <Button Text="Submit Comment" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" Clicked="SubmitComment_Clicked"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

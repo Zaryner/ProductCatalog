@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="Platinum_Star.Search"
              xmlns:controls="clr-namespace:Platinum_Star"
              
@@ -27,7 +26,66 @@
 
 
 
-    <VerticalStackLayout>
 
-    </VerticalStackLayout>
+    <ScrollView>
+        
+        <CollectionView x:Name="ProductCards"
+                   SelectionMode="None"
+                        HorizontalOptions="Start"
+                         ItemsLayout="VerticalGrid, 2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="0"
+       BackgroundColor="#FDFDFC"
+       Padding="10"
+       WidthRequest="200"
+       HeightRequest="280">
+
+                        <StackLayout Orientation="Vertical"
+             Padding="5">
+                            <Image Source="{Binding ImageUrl}"
+           HeightRequest="80"
+           WidthRequest="80"
+           Aspect="AspectFit" />
+                            <StackLayout Orientation="Vertical"
+                 Padding="5,10,5,5">
+
+                                <Label Text="{Binding Name}"
+               FontAttributes="Bold"
+               FontSize="14" />
+                                <Label Text="{Binding Description}"
+               FontSize="12"
+               MaxLines="3"
+               LineBreakMode="TailTruncation" />
+                                <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="End">
+                                    <Label Text="{Binding Rating}"
+                   FontSize="12"
+                   TextColor="Orange" />
+                                    <Image Source="star.png"
+                   HeightRequest="12"
+                   WidthRequest="12" />
+                                </StackLayout>
+                                <Label Text="{Binding Price}"
+               FontSize="16"
+               FontAttributes="Bold" />
+                                <Button Text="В корзину"
+           Clicked="OnAddToCartClicked"
+                    VerticalOptions="End"
+                    HorizontalOptions="End" Margin="1"/>
+                                <Button  Text="В избранные"
+                    Clicked="OnLikeClicked"
+                    VerticalOptions="End"
+                    HorizontalOptions="End" />
+                            </StackLayout>
+                        </StackLayout>
+
+                    </Frame>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+
 </ContentPage>

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Platinum_Star"
     xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
     
 
@@ -24,13 +24,13 @@
              Icon="person.png"
              Route="home">
 
-            <ShellContent Title="Me"
-                          Icon="person.png"
-                          ContentTemplate="{DataTemplate local:MainPage}" 
+            <ShellContent Title="Liked"
+                          Icon="like1.png"
+                          ContentTemplate="{DataTemplate local:Liked}" 
                           Route="me"/>
             <ShellContent Title="About"
                           Icon="info.png"
-                          ContentTemplate="{DataTemplate local:MainPage}" />
+                          ContentTemplate="{DataTemplate local:About}" />
         </Tab>
 
     </FlyoutItem>

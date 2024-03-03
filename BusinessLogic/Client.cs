@@ -10,6 +10,7 @@ namespace Platinum_Star
     class Client
     {
         public static List<Client> clients;
+        public static Client current;
 
         string? _name;
         string? _phone;
@@ -17,7 +18,8 @@ namespace Platinum_Star
         int _id;
         double _discount;
 
-        List<Product> shoppingProducts;
+        public List<Product> shoppingProducts;
+        public List<Product> likedProducts;
 
         List<int> _reviews;
         List<string> _categories;
@@ -25,6 +27,8 @@ namespace Platinum_Star
         static Client()
         {
             clients = new List<Client>();
+            clients.Add(new Client("Гость","","",2));
+            current = clients[0];
         }
         public Client(string name, string phone, string address, double discount = 3)
         {
@@ -35,6 +39,7 @@ namespace Platinum_Star
             Id = clients.Count;
             clients.Add(this);
             shoppingProducts = new List<Product>();
+            likedProducts = new List<Product>();
             _reviews = new List<int>();
             _categories = new List<string>();
         }
