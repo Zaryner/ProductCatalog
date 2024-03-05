@@ -20,8 +20,8 @@
 
                 <!-- Кнопки "Добавить в корзину" и "Добавить в избранное" -->
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
-                    <Button Text="Add to Cart" BackgroundColor="Green" TextColor="White" Margin="0,0,10,0" Clicked="AddToCart_Clicked"/>
-                    <ImageButton Source="like2.png" WidthRequest="50" HeightRequest="50" Margin="0,0,0,0" Clicked="FavoriteButton_Clicked" x:Name="like"/>
+                    <Button Text="В корзину" BackgroundColor="Green" BorderColor="Green" TextColor="White" Margin="0,0,10,0" Clicked="AddToCart_Clicked" x:Name="to_cart"/>
+                    <Button Text="В избранные" BackgroundColor="Orange" BorderColor="Orange" TextColor="White" Margin="0,0,10,0" Clicked="FavoriteButton_Clicked" x:Name="like"/>
                 </StackLayout>
 
                 <!-- Рейтинг товара -->

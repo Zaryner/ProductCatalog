@@ -4,7 +4,7 @@
              x:Class="Platinum_Star.Search"
              xmlns:controls="clr-namespace:Platinum_Star"
              
-             Title="Search">
+             Title="Поиск">
     <Shell.SearchHandler>
         <controls:ProductSearchHandler Placeholder="Search" Query="" ShowsResults="True" x:Name="searchHandler">
             <controls:ProductSearchHandler.ItemTemplate>
@@ -28,31 +28,33 @@
 
 
     <ScrollView>
-        
+
         <CollectionView x:Name="ProductCards"
-                   SelectionMode="None"
+                   SelectionMode="Single"
                         HorizontalOptions="Start"
-                         ItemsLayout="VerticalGrid, 2">
+                        SelectedItem="{Binding SelectedItem}"
+                        >
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame CornerRadius="0"
        BackgroundColor="#FDFDFC"
        Padding="10"
        WidthRequest="200"
-       HeightRequest="280">
+       HeightRequest="280" BindingContext="{Binding}" >
 
                         <StackLayout Orientation="Vertical"
              Padding="5">
                             <Image Source="{Binding ImageUrl}"
            HeightRequest="80"
            WidthRequest="80"
-           Aspect="AspectFit" />
+           Aspect="AspectFit" 
+                                   />
                             <StackLayout Orientation="Vertical"
                  Padding="5,10,5,5">
 
-                                <Label Text="{Binding Name}"
+                                <Label Text="{Binding Name}" 
                FontAttributes="Bold"
-               FontSize="14" />
+               FontSize="14"/>
                                 <Label Text="{Binding Description}"
                FontSize="12"
                MaxLines="3"
@@ -80,6 +82,11 @@
                             </StackLayout>
                         </StackLayout>
 
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTapped"
+                              NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        
                     </Frame>
 
                 </DataTemplate>

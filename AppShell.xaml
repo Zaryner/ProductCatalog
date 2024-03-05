@@ -12,11 +12,11 @@
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
 
 
-        <ShellContent Title="Search"
+        <ShellContent Title="Поиск"
                       Icon="search.png"
                       ContentTemplate="{DataTemplate local:Search}" 
                       Route="search"/>
-        <ShellContent Title="Shopping cart"
+        <ShellContent Title="Корзина"
                       Icon="shopping_cart.png"
                       ContentTemplate="{DataTemplate local:ShoppingCart}"
                       Route="shopping_cart"/>
@@ -24,11 +24,11 @@
              Icon="person.png"
              Route="home">
 
-            <ShellContent Title="Liked"
+            <ShellContent Title="Избранные"
                           Icon="like1.png"
                           ContentTemplate="{DataTemplate local:Liked}" 
                           Route="me"/>
-            <ShellContent Title="About"
+            <ShellContent Title="О программе"
                           Icon="info.png"
                           ContentTemplate="{DataTemplate local:About}" />
         </Tab>

@@ -22,22 +22,51 @@ public partial class ProductPage : ContentPage
     public ProductPage()
     {
         InitializeComponent();
-        ChangeLikeIcon();
-
+        this.Loaded += (s, e) =>
+        {
+            ChangeLikeText();
+            ChangeShoppingText();
+        };
     }
 
 
-    void ChangeLikeIcon()
+    void ChangeLikeText()
     {
+        
         if (Client.current.likedProducts.Contains(Product.products[ProductId]))
         {
-            like.Source = "like1.png";
+            like.Text = "Уже в избранных";
+            like.TextColor = Colors.Orange;
+            like.Background = Colors.White;
+            like.BorderWidth = 5;
         }
         else
         {
-            like.Source = "like2.png";
+            like.Text = "В избранные";
+            like.TextColor= Colors.White;
+            like.Background = Colors.Orange;
+            like.BorderWidth = 0;
+       }
+    }
+    void ChangeShoppingText()
+    {
+
+        if (Client.current.shoppingProducts.Contains(Product.products[ProductId]))
+        {
+            to_cart.Text = "Уже в корзине";
+            to_cart.TextColor = Colors.Green;
+            to_cart.Background = Colors.White;
+            to_cart.BorderWidth = 5;
+        }
+        else
+        {
+           to_cart.Text = "В корзину";
+            to_cart.Background = Colors.Green;
+            to_cart.BorderWidth = 0;
+            to_cart.TextColor = Colors.White;
         }
     }
+
     private async void Back(object sender, System.EventArgs e)
     {
         await Shell.Current.GoToAsync("..");
@@ -52,11 +81,19 @@ public partial class ProductPage : ContentPage
         {
             Client.current.likedProducts.Add(Product.products[ProductId]);
         }
-        ChangeLikeIcon();
+        ChangeLikeText();
     }
-    private async void AddToCart_Clicked(object sender, System.EventArgs e)
+    private void AddToCart_Clicked(object sender, System.EventArgs e)
     {
-        // await Shell.Current.GoToAsync("..");
+        if (Client.current.shoppingProducts.Contains(Product.products[ProductId]))
+        {
+            Client.current.shoppingProducts.Remove(Product.products[ProductId]);
+        }
+        else
+        {
+            Client.current.shoppingProducts.Add(Product.products[ProductId]);
+        }
+        ChangeShoppingText();
     }
     private async void SubmitComment_Clicked(object sender, System.EventArgs e)
     {
