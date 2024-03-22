@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Platinum_Star.Models;
 
 namespace Platinum_Star;
 
@@ -12,10 +13,10 @@ public partial class ProductPage : ContentPage
         set
         {
             id = value;
-            ProductImage.Source = Product.products[ProductId].ImageUrl;
-            ProductName.Text = Product.products[ProductId].Name;
-            ProductDescription.Text = Product.products[ProductId].Description;
-            ProductPrice.Text = Product.products[ProductId].Price.ToString();
+            ProductImage.Source = ProductModel.products[ProductId].ImageUrl;
+            ProductName.Text = ProductModel.products[ProductId].Name;
+            ProductDescription.Text = ProductModel.products[ProductId].Description;
+            ProductPrice.Text = ProductModel.products[ProductId].Price.ToString();
             OnPropertyChanged();
         }
     }
@@ -33,7 +34,7 @@ public partial class ProductPage : ContentPage
     void ChangeLikeText()
     {
         
-        if (Client.current.likedProducts.Contains(Product.products[ProductId]))
+        if (ClientModel.current.likedProducts.Contains(ProductModel.products[ProductId]))
         {
             like.Text = "Уже в избранных";
             like.TextColor = Colors.Orange;
@@ -51,7 +52,7 @@ public partial class ProductPage : ContentPage
     void ChangeShoppingText()
     {
 
-        if (Client.current.shoppingProducts.Contains(Product.products[ProductId]))
+        if (ClientModel.current.shoppingProducts.Contains(ProductModel.products[ProductId]))
         {
             to_cart.Text = "Уже в корзине";
             to_cart.TextColor = Colors.Green;
@@ -73,25 +74,25 @@ public partial class ProductPage : ContentPage
     }
     private void FavoriteButton_Clicked(object sender, System.EventArgs e)
     {
-        if (Client.current.likedProducts.Contains(Product.products[ProductId]))
+        if (ClientModel.current.likedProducts.Contains(ProductModel.products[ProductId]))
         {
-            Client.current.likedProducts.Remove(Product.products[ProductId]);
+            ClientModel.current.likedProducts.Remove(ProductModel.products[ProductId]);
         }
         else
         {
-            Client.current.likedProducts.Add(Product.products[ProductId]);
+            ClientModel.current.likedProducts.Add(ProductModel.products[ProductId]);
         }
         ChangeLikeText();
     }
     private void AddToCart_Clicked(object sender, System.EventArgs e)
     {
-        if (Client.current.shoppingProducts.Contains(Product.products[ProductId]))
+        if (ClientModel.current.shoppingProducts.Contains(ProductModel.products[ProductId]))
         {
-            Client.current.shoppingProducts.Remove(Product.products[ProductId]);
+            ClientModel.current.shoppingProducts.Remove(ProductModel.products[ProductId]);
         }
         else
         {
-            Client.current.shoppingProducts.Add(Product.products[ProductId]);
+            ClientModel.current.shoppingProducts.Add(ProductModel.products[ProductId]);
         }
         ChangeShoppingText();
     }

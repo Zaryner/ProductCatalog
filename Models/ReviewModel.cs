@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Platinum_Star.BusinessLogic;
+using Platinum_Star.Models;
 
-namespace Platinum_Star.BusinessLogic
+namespace Platinum_Star.Models
 {
-    class Review
+    class ReviewModel
     {
-        public static List<Review> reviews;
+        public static List<ReviewModel> reviews;
         string? _description;
         int _clientId;
         int _productId;
         int _id;
         double _rating;
 
-        static Review()
+        static ReviewModel()
         {
-            reviews = new List<Review>();
+            reviews = new List<ReviewModel>();
         }
 
-        public Review(int clientId, int productId, string? description, double rating)
+        public ReviewModel(int clientId, int productId, string? description, double rating)
         {
             ClientId = clientId;
             ProductId = productId;
@@ -30,7 +30,7 @@ namespace Platinum_Star.BusinessLogic
             Id = reviews.Count;
             reviews.Add(this);
         }
-        ~Review()
+        ~ReviewModel()
         {
             reviews.Remove(this);
         }

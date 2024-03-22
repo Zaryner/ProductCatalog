@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Platinum_Star.Models;
 
 namespace Platinum_Star
 {
     class ProductSearchHandler:SearchHandler
     {
-        public IList<Product> Products { get; set; }
+        public IList<ProductModel> Products { get; set; }
         public Type SelectedItemNavigationTarget { get; set; }
         
 
@@ -25,7 +26,7 @@ namespace Platinum_Star
                 ItemsSource = Products
                     .Where(product => (product.Name.ToLower().Contains(newValue.ToLower())||
                     product.Name.ToLower().Contains(ToRussianLayaut(newValue.ToLower()))))
-                    .ToList<Product>();
+                    .ToList<ProductModel>();
             }
         }
 
@@ -40,7 +41,7 @@ namespace Platinum_Star
 
         ShellNavigationState state = (App.Current.MainPage as Shell).CurrentState;
             // The following route works because route names are unique in this app.
-            await Shell.Current.GoToAsync($"productpage?id={((Product)item).Id}");
+            await Shell.Current.GoToAsync($"productpage?id={((ProductModel)item).Id}");
         }
 
         public static string ToRussianLayaut(string s)

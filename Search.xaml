@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Platinum_Star.Search"
              xmlns:controls="clr-namespace:Platinum_Star"
-             
              Title="Поиск">
+
     <Shell.SearchHandler>
         <controls:ProductSearchHandler Placeholder="Search" Query="" ShowsResults="True" x:Name="searchHandler">
             <controls:ProductSearchHandler.ItemTemplate>
@@ -23,8 +23,7 @@
             </controls:ProductSearchHandler.ItemTemplate>
         </controls:ProductSearchHandler>
     </Shell.SearchHandler>
-
-
+    
 
 
     <ScrollView>
@@ -35,12 +34,13 @@
                         SelectedItem="{Binding SelectedItem}"
                         >
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame CornerRadius="0"
-       BackgroundColor="#FDFDFC"
+                <DataTemplate x:Name="CardTemplate">
+                    <Border  x:Name="CardBorder"
+       BackgroundColor="White"
        Padding="10"
+                             Margin="10"
        WidthRequest="200"
-       HeightRequest="280" BindingContext="{Binding}" >
+       HeightRequest="290" BindingContext="{Binding}" >
 
                         <StackLayout Orientation="Vertical"
              Padding="5">
@@ -71,23 +71,29 @@
                                 <Label Text="{Binding Price}"
                FontSize="16"
                FontAttributes="Bold" />
-                                <Button Text="В корзину"
+                                <Button Text="В корзину" Loaded="ToCartLoaded" 
+                                        BackgroundColor="Green" BorderColor="Green" TextColor="White"
            Clicked="OnAddToCartClicked"
                     VerticalOptions="End"
-                    HorizontalOptions="End" Margin="1"/>
-                                <Button  Text="В избранные"
+                    HorizontalOptions="End" Margin="1"
+                                        x:Name="addToCartButton">
+                                    
+                                </Button>
+                                <Button  Text="В избранные" Loaded="LikeLoaded"
+                                          BackgroundColor="Orange" BorderColor="Orange" TextColor="White"
                     Clicked="OnLikeClicked"
                     VerticalOptions="End"
-                    HorizontalOptions="End" />
+                    HorizontalOptions="End" 
+                                         x:Name="likeButton"/>
                             </StackLayout>
                         </StackLayout>
 
-                        <Frame.GestureRecognizers>
+                        <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTapped"
                               NumberOfTapsRequired="1" />
-                        </Frame.GestureRecognizers>
+                        </Border.GestureRecognizers>
                         
-                    </Frame>
+                    </Border>
 
                 </DataTemplate>
 

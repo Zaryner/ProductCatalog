@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Platinum_Star.BusinessLogic;
+using Platinum_Star.Models;
 
-namespace Platinum_Star
+namespace Platinum_Star.Models
 {
-    class Client
+    class ClientModel
     {
-        public static List<Client> clients;
-        public static Client current;
+        public static List<ClientModel> clients;
+        public static ClientModel current;
 
         string? _name;
         string? _phone;
@@ -18,19 +18,19 @@ namespace Platinum_Star
         int _id;
         double _discount;
 
-        public List<Product> shoppingProducts;
-        public List<Product> likedProducts;
+        public List<ProductModel> shoppingProducts;
+        public List<ProductModel> likedProducts;
 
         List<int> _reviews;
         List<string> _categories;
 
-        static Client()
+        static ClientModel()
         {
-            clients = new List<Client>();
-            clients.Add(new Client("Гость","","",2));
+            clients = new List<ClientModel>();
+            clients.Add(new ClientModel("Гость","","",2));
             current = clients[0];
         }
-        public Client(string name, string phone, string address, double discount = 3)
+        public ClientModel(string name, string phone, string address, double discount = 3)
         {
             Name = name;
             Phone = phone;
@@ -38,8 +38,8 @@ namespace Platinum_Star
             Discount = discount;
             Id = clients.Count;
             clients.Add(this);
-            shoppingProducts = new List<Product>();
-            likedProducts = new List<Product>();
+            shoppingProducts = new List<ProductModel>();
+            likedProducts = new List<ProductModel>();
             _reviews = new List<int>();
             _categories = new List<string>();
         }
