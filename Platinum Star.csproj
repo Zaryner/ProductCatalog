@@ -56,25 +56,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="ProductPage.xaml.cs">
+	  <Compile Update="Views\ProductPage.xaml.cs">
 	    <DependentUpon>ProductPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="About.xaml">
+	  <MauiXaml Update="Views\About.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Liked.xaml">
+	  <MauiXaml Update="Views\Liked.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ProductPage.xaml">
+	  <MauiXaml Update="Views\ProductPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Search.xaml">
+	  <MauiXaml Update="Views\Search.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ShoppingCart.xaml">
+	  <MauiXaml Update="Views\ShoppingCart.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

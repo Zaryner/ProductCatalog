@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Platinum_Star.Models;
@@ -64,10 +66,38 @@ namespace Platinum_Star.Models
             products.Remove(this);
         }
 
-        public string Name { get { return _name; } set { _name = value; } }
-        public string ImageUrl { get { return _imageUrl; } set { _imageUrl = value; } }
-        public int Id { get { return _id; } set { _id = value; } }
-        public string Description { get { return _description; } set { _description = value; } }
+        public string Name 
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+            }
+        }
+        public string ImageUrl
+        {
+            get { return _imageUrl; }
+            set
+            {
+                _imageUrl = value;
+            }
+        }
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+            }
+        }
+        public string Description 
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+            }
+        }
         public double Rating
         {
             get
@@ -81,8 +111,22 @@ namespace Platinum_Star.Models
                 return rating;
             }
         }
-        public double Price { get { return _price; } set { _price = value; } }
-        public int Count { get { return _count; } set { _count = value; } }
+        public double Price
+        {
+            get { return _price; }
+            set
+            {
+                _price = value;
+            }
+        }
+        public int Count 
+        {
+            get { return _count; }
+            set
+            {
+                _count = value;
+            }
+        }
 
         public void AddReview(int review)
         {
@@ -108,6 +152,7 @@ namespace Platinum_Star.Models
         {
             _categories.Remove(category.ToLower());
         }
+
     }
 
 }

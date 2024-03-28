@@ -31,6 +31,7 @@
         <CollectionView x:Name="ProductCards"
                    SelectionMode="Single"
                         HorizontalOptions="Start"
+                        ItemsSource="{Binding Products}"
                         SelectedItem="{Binding SelectedItem}"
                         >
             <CollectionView.ItemTemplate>
@@ -40,7 +41,7 @@
        Padding="10"
                              Margin="10"
        WidthRequest="200"
-       HeightRequest="290" BindingContext="{Binding}" >
+       HeightRequest="290" >
 
                         <StackLayout Orientation="Vertical"
              Padding="5">
@@ -73,15 +74,18 @@
                FontAttributes="Bold" />
                                 <Button Text="В корзину" Loaded="ToCartLoaded" 
                                         BackgroundColor="Green" BorderColor="Green" TextColor="White"
-           Clicked="OnAddToCartClicked"
+           Command="{Binding  Path= BindingContext.AddToCartCommand,Source={Reference ProductCards }}"
+                                        CommandParameter="{Binding Source={RelativeSource Self}}"
                     VerticalOptions="End"
                     HorizontalOptions="End" Margin="1"
-                                        x:Name="addToCartButton">
+                                        x:Name="addToCartButton"
+                                        >
                                     
                                 </Button>
                                 <Button  Text="В избранные" Loaded="LikeLoaded"
                                           BackgroundColor="Orange" BorderColor="Orange" TextColor="White"
-                    Clicked="OnLikeClicked"
+                              Command="{Binding  Path= BindingContext.LikeCommand,Source={Reference ProductCards }}"
+                                        CommandParameter="{Binding Source={RelativeSource Self}}"
                     VerticalOptions="End"
                     HorizontalOptions="End" 
                                          x:Name="likeButton"/>

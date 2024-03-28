@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Platinum_Star.Models;
+using Platinum_Star.ViewModels;
 
 namespace Platinum_Star;
 
@@ -13,7 +14,8 @@ public partial class ProductPage : ContentPage
         set
         {
             id = value;
-            ProductImage.Source = ProductModel.products[ProductId].ImageUrl;
+            (BindingContext as ProductPageViewModel).Product = ProductModel.products[id];
+           // ProductImage.Source = ProductModel.products[ProductId].ImageUrl;
             ProductName.Text = ProductModel.products[ProductId].Name;
             ProductDescription.Text = ProductModel.products[ProductId].Description;
             ProductPrice.Text = ProductModel.products[ProductId].Price.ToString();
@@ -23,6 +25,7 @@ public partial class ProductPage : ContentPage
     public ProductPage()
     {
         InitializeComponent();
+        BindingContext = new ProductPageViewModel();
         this.Loaded += (s, e) =>
         {
             ChangeLikeText();
