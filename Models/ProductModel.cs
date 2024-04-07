@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -9,9 +12,9 @@ using Platinum_Star.Models;
 
 namespace Platinum_Star.Models
 {
-    class ProductModel
+    public class ProductModel
     {
-        public static List<ProductModel> products;
+        public static ObservableCollection<ProductModel> products;
 
         string _name;
         string _description;
@@ -25,7 +28,7 @@ namespace Platinum_Star.Models
 
         static ProductModel()
         {
-            products = new List<ProductModel>();
+            products = new ObservableCollection<ProductModel>();
             products.Add(new ProductModel("Воздух 250 мл.", "Тестовый продукт. Он не должен появляться в каталоге", 5.34, 99999999,"product0.jpg"));
             products[products.Count - 1].AddCateggory("развлечения");
             products.Add(new ProductModel("Топорик", "Тестовый продукт. Он не должен появляться в каталоге", 23, 99, "quelling_blade.jpg"));
@@ -153,6 +156,11 @@ namespace Platinum_Star.Models
             _categories.Remove(category.ToLower());
         }
 
+
+        public static explicit operator Content(ProductModel product)
+        {
+            return new Content(product.Id,1);
+        }
     }
 
 }

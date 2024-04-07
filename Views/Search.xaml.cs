@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls.Shapes;
 using System.Security.Cryptography;
 using System.Windows.Input;
 using Platinum_Star.Models;
+using Platinum_Star.ViewModels;
 
 namespace Platinum_Star;
 
@@ -10,9 +11,9 @@ public partial class Search : ContentPage
 {
 	public Search()
 	{
-
-       InitializeComponent();
         BindingContext = new CatalogViewModel();
+        InitializeComponent();
+       // BindingContext = new CatalogViewModel();
         searchHandler.Products = ProductModel.products;
 #if ANDROID||IOS
         ProductCards.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
@@ -21,7 +22,7 @@ public partial class Search : ContentPage
 #endif      
         this.NavigatedTo += (object sender, NavigatedToEventArgs e) =>
         {
-            DisplayAlert(" "," "," ");
+            
         };
     }
 
@@ -29,11 +30,21 @@ public partial class Search : ContentPage
 
     private void ToCartLoaded(object sender, System.EventArgs e)
     {
-        (BindingContext as CatalogViewModel).ChangeShoppingText(sender as Button);
+        CatalogViewModel.ChangeShoppingText(sender as Button);
+        (BindingContext as CatalogViewModel).ToCartButtons.Add(sender as Button);
     }
     private void LikeLoaded(object sender, System.EventArgs e)
     {
-        (BindingContext as CatalogViewModel).ChangeLikeText(sender as Button);
+        CatalogViewModel.ChangeLikeText(sender as Button);
+        (BindingContext as CatalogViewModel).LikeButtons.Add(sender as Button);
+    }
+    private void ToCartUnloaded(object sender, System.EventArgs e)
+    {
+        (BindingContext as CatalogViewModel).ToCartButtons.Remove(sender as Button);
+    }
+    private void LikeUnloaded(object sender, System.EventArgs e)
+    {
+        (BindingContext as CatalogViewModel).LikeButtons.Remove(sender as Button);
     }
 
     private async void OnTapped(object sender, System.EventArgs e)
@@ -43,6 +54,7 @@ public partial class Search : ContentPage
                 await Shell.Current.GoToAsync($"productpage?id={(ProductCards.SelectedItem as ProductModel).Id}");
         }
     }
+
 
 
 

@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Platinum_Star.ProductPage" Title="Product">
+             x:Class="Platinum_Star.ProductPage"
+             xmlns:controls="clr-namespace:Platinum_Star"
+             xmlns:vms="clr-namespace:Platinum_Star.ViewModels">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="10">
-                <Button Text="Back" BackgroundColor="Black" TextColor="White" HorizontalOptions="Start" Clicked="Back"/>
+            <StackLayout Padding="10" BindingContext="{Binding Product}">
                 <!-- Изображение товара -->
-                <Image Aspect="AspectFit" HeightRequest="300" x:Name="ProductImage" Source="{Binding Product.ImageUrl}"/>
+                <Image Aspect="AspectFit" HeightRequest="300" x:Name="ProductImage" Source="{Binding ImageUrl}"/>
 
                 <!-- Название товара -->
-                <Label FontAttributes="Bold" FontSize="Title" Margin="0,10,0,0" x:Name="ProductName"/>
+                <Label FontAttributes="Bold" FontSize="Title" Margin="0,10,0,0" x:Name="ProductName" Text="{Binding Name}"/>
 
                 <!-- Цена товара -->
-                <Label FontSize="Subtitle" TextColor="Green" Margin="0,5,0,0" x:Name="ProductPrice"/>
+                <Label FontSize="Subtitle" TextColor="Green" Margin="0,5,0,0" x:Name="ProductPrice" Text="{Binding Price}"/>
 
                 <!-- Описание товара -->
-                <Label x:Name="ProductDescription" Margin="0,10,0,0" />
+                <Label x:Name="ProductDescription" Margin="0,10,0,0"  Text="{Binding Description}"/>
 
                 <!-- Кнопки "Добавить в корзину" и "Добавить в избранное" -->
                 <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
-                    <Button Text="В корзину" BackgroundColor="Green" BorderColor="Green" TextColor="White" Margin="0,0,10,0" Clicked="AddToCart_Clicked" x:Name="to_cart"/>
-                    <Button Text="В избранные" BackgroundColor="Orange" BorderColor="Orange" TextColor="White" Margin="0,0,10,0" Clicked="FavoriteButton_Clicked" x:Name="like"/>
+                    <Button Text="В корзину" BackgroundColor="Green" BorderColor="Green"
+                            TextColor="White" Margin="0,0,10,0" 
+                             CommandParameter="{Binding Source={RelativeSource Self}}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vms:ProductPageViewModel}}, Path=AddToCartCommand}" x:Name="to_cart"
+                            Loaded="ToCartLoaded" Unloaded="ToCartUnloaded"/>
+                    <Button Text="В избранные" BackgroundColor="Orange" BorderColor="Orange"
+                            TextColor="White" Margin="0,0,10,0" x:Name="like"
+                              CommandParameter="{Binding Source={RelativeSource Self}}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vms:ProductPageViewModel}}, Path=LikeCommand}"
+                            Loaded="LikeLoaded" Unloaded="LikeUnloaded"/>
                 </StackLayout>
 
                 <!-- Рейтинг товара -->
@@ -45,8 +54,12 @@
                 <!-- Форма оставления комментария -->
                 <Label Text="Leave a Comment:" FontSize="Subtitle" Margin="0,10,0,0"/>
                 <Entry Placeholder="Enter your comment" Margin="0,5,0,0" x:Name="CommentEntry"/>
-                <Slider Minimum="0" Maximum="5" ValueChanged="CommentRating_ValueChanged" x:Name="CommentRating"/>
-                <Button Text="Submit Comment" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" Clicked="SubmitComment_Clicked"/>
+                <Slider Minimum="0" Maximum="10" Value="5" x:Name="CommentRating"
+                        DragCompletedCommand="{Binding Source={RelativeSource AncestorType={x:Type vms:ProductPageViewModel}}, Path=RatingCommand}"/>
+                <Button Text="Submit Comment" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0"
+                        CommandParameter="{Binding Source={RelativeSource Self}}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vms:ProductPageViewModel}}, Path=SubmitCommand}"
+                        />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

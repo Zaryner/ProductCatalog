@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Platinum_Star.Models;
 
 namespace Platinum_Star.Models
 {
-    class ClientModel
+    class ClientModel : INotifyPropertyChanged
     {
         public static List<ClientModel> clients;
         public static ClientModel current;
@@ -18,11 +22,10 @@ namespace Platinum_Star.Models
         int _id;
         double _discount;
 
-        public List<ProductModel> shoppingProducts;
-        public List<ProductModel> likedProducts;
+        public ObservableCollection<Content> shoppingProducts;
+        public ObservableCollection<ProductModel> likedProducts;
 
         List<int> _reviews;
-        List<string> _categories;
 
         static ClientModel()
         {
@@ -38,16 +41,27 @@ namespace Platinum_Star.Models
             Discount = discount;
             Id = clients.Count;
             clients.Add(this);
-            shoppingProducts = new List<ProductModel>();
-            likedProducts = new List<ProductModel>();
+            shoppingProducts = new ObservableCollection<Content>();
+            likedProducts = new ObservableCollection<ProductModel>();
             _reviews = new List<int>();
-            _categories = new List<string>();
         }
-
-        public string Name { get { return _name; } set { _name = value; } }
+        public string Name {
+            get {
+                return _name; 
+            }
+            set {
+                _name = value;
+                OnPropertyChanged("Name");
+            } 
+        }
         public string Phone { get { return _phone; } set { _phone = value; } }
         public string Address { get { return _address; } set { _address = value; } }
         public int Id { get { return _id; } set { _id = value; } }
         public double Discount { get { return _discount; } set { _discount = value; } }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string name = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

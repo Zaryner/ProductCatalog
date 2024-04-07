@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Platinum_Star.Search"
              xmlns:controls="clr-namespace:Platinum_Star"
-             Title="Поиск">
+             Title="Каталог">
 
     <Shell.SearchHandler>
         <controls:ProductSearchHandler Placeholder="Search" Query="" ShowsResults="True" x:Name="searchHandler">
@@ -32,11 +32,10 @@
                    SelectionMode="Single"
                         HorizontalOptions="Start"
                         ItemsSource="{Binding Products}"
-                        SelectedItem="{Binding SelectedItem}"
                         >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:Name="CardTemplate">
-                    <Border  x:Name="CardBorder"
+                    <Border  x:Name="CardBorder" 
        BackgroundColor="White"
        Padding="10"
                              Margin="10"
@@ -63,29 +62,29 @@
                                 <StackLayout Orientation="Horizontal"
                      HorizontalOptions="End">
                                     <Label Text="{Binding Rating}"
-                   FontSize="12"
+                   FontSize="16"
                    TextColor="Orange" />
                                     <Image Source="star.png"
-                   HeightRequest="12"
-                   WidthRequest="12" />
+                   HeightRequest="16"
+                   WidthRequest="16" />
                                 </StackLayout>
                                 <Label Text="{Binding Price}"
                FontSize="16"
                FontAttributes="Bold" />
-                                <Button Text="В корзину" Loaded="ToCartLoaded" 
+                                <Button Text="В корзину" Loaded="ToCartLoaded"  Unloaded="ToCartUnloaded"
                                         BackgroundColor="Green" BorderColor="Green" TextColor="White"
            Command="{Binding  Path= BindingContext.AddToCartCommand,Source={Reference ProductCards }}"
-                                        CommandParameter="{Binding Source={RelativeSource Self}}"
+                                        CommandParameter="{Binding Source={RelativeSource Self}}"                                      
                     VerticalOptions="End"
                     HorizontalOptions="End" Margin="1"
                                         x:Name="addToCartButton"
                                         >
                                     
                                 </Button>
-                                <Button  Text="В избранные" Loaded="LikeLoaded"
+                                <Button  Text="В избранные" Loaded="LikeLoaded"  Unloaded="LikeUnloaded"
                                           BackgroundColor="Orange" BorderColor="Orange" TextColor="White"
                               Command="{Binding  Path= BindingContext.LikeCommand,Source={Reference ProductCards }}"
-                                        CommandParameter="{Binding Source={RelativeSource Self}}"
+                                        CommandParameter="{Binding Source={RelativeSource Self}}" 
                     VerticalOptions="End"
                     HorizontalOptions="End" 
                                          x:Name="likeButton"/>
@@ -102,6 +101,24 @@
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <ContentView>
+                    <StackLayout HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                        <Label Text="No results matched your filter."
+                           Margin="10,25,10,10"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           HorizontalOptions="Fill"
+                           HorizontalTextAlignment="Center" />
+                        <Label Text="Try a broader filter?"
+                           FontAttributes="Italic"
+                           FontSize="12"
+                           HorizontalOptions="Fill"
+                           HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </ContentView>
+            </CollectionView.EmptyView>
         </CollectionView>
     </ScrollView>
 
